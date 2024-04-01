@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animation project</title>
+    <link rel="stylesheet" href="./main.css" />
+    <script
+      src="https://kit.fontawesome.com/a076d05399.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-black">
+    <div class="box"></div>
+    <!-- creating wrapper -->
+    <div class="wrapper">
+      <nav
+      class="flex items-center justify-between px-4 md:px-14 h-16 sticky top-0 bg-black"
+    >
+      <div class="hidden md:block"></div>
+      <div><h1 class="text-3xl font-[600] text-white a-tag">Logo</h1></div>
+      <div class="flex items-center gap-4">
+        <a href="./home.html" class="text-white font-[600] md:text-lg a-tag"
+          >HOME</a
+        >
+        <a href="./projects.html" class="text-white font-[600] md:text-lg a-tag"
+          >PROJECT</a
+        >
+        <a href="./propos.html" class="text-white font-[600] md:text-lg a-tag"
+          >A PROPSOS</a
+        >
+      </div>
+    </nav>
+    <!--other section-->
+    <div
+      class="main bg-red-800 flex flex-col items-center justify-center my-4"
+    >
+    <h1 class="font-[bely-display,sans-serif] self-start mx-20 text-[11vw] text-white mt-10 md:mt-0">Bonjour.</h1>
+      <p class="content text-white  md:text-[1.8rem] text-justify w-80 md:w-[70rem] font-[Garamond,sans-serif] mt-10 md:mt-0">
+        Bonjour. Je suis Davy Jacquemard, un étudiant avec un grand intêret pour
+        la mode, le design et les interactions. Pour moi, chaque détail compte.
+        Je suis actuellement développeur front-end chez Adeliom Agency à
+        Strasbourg dans le cadre de mon stage. Un projet, une idée, une
+        suggestion ? N'hésitez pas à me laisser un mot !
+      </p>
+      <button style="font-size: 24px" class="flex text-white gap-2 mt-36 md:mt-60 mb-10">
+        Email
+      </button>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p class="font-extrabold py-1 md:text-2xl text-center text-white">
+        hello[at]davyjacquemard.com
+      </p>
+    </div>
+    </div>
+    
+    <div class="cursor"></div>
+    <div class="cursor2"></div>
+    <script>
+      var cursor = document.querySelector(".cursor");
+      var cursor2 = document.querySelector(".cursor2");
+      document.addEventListener("mousemove", function (e) {
+        cursor.style.cssText = cursor2.style.cssText =
+          "left:" + e.clientX + "px;top:" + e.clientY + "px;";
+      });
+    </script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+      integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="script.js"></script>
+  </body>
+</html>

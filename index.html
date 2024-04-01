@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animation project</title>
+    <link rel="stylesheet" href="./main.css" />
+    <script
+      src="https://kit.fontawesome.com/a076d05399.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <!-- Include the Draggable library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/Draggable.min.js"></script>
+    <style>
+      /* Add styles for the draggable image */
+      .draggable {
+        cursor: none;
+      }
+      .title {
+        font-size: 8vw;
+        mix-blend-mode: exclusion;
+        font-family: bely-display, sans-serif;
+      }
+    </style>
+  </head>
+  <body class="bg-black">
+    <div class="box"></div>
+
+    
+    <!-- creating wrapper -->
+    <div class="wrapper">
+      <nav
+        class="flex items-center justify-between px-4 md:px-14 h-16 sticky top-0 bg-black"
+      >
+        <div class="hidden md:block"></div>
+        <div><h1 class="text-3xl font-[600] text-white a-tag">Logo</h1></div>
+        <div class="flex items-center gap-4">
+          <a href="./home.html" class="text-white font-[600] md:text-lg a-tag"
+            >HOME</a
+          >
+          <a
+            href="./projects.html"
+            class="text-white font-[600] md:text-lg a-tag"
+            >PROJECT</a
+          >
+          <a href="./propos.html" class="text-white font-[600] md:text-lg a-tag"
+            >A PROPSOS</a
+          >
+        </div>
+      </nav>
+
+      <!-- other main section -->
+      <main class="w-9/12 h-[90vh] justify-center">
+        <!-- Image to be dragged -->
+        <div id="draggable" class="draggable z-9">
+          <img
+            class="w-[350px] h-[350px]"
+            src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt=""
+          />
+          <h1 class="text-xl text-white text-center">[DRAG IT]</h1>
+        </div>
+        <div class="h-full h-[10px] w-full z-10">
+          <h1
+            class="title md:text-[4.6rem] lg:mt-[270px] tracking-widest font-extrabold text-white absolute left-11 md:top-5 top-48"
+          >
+            Davy Jaqquenmard
+          </h1>
+          <h1 class="absolute left-96 bottom-20 text-white text-4xl text-[600]">
+            Dacouvrir
+          </h1>
+        </div>
+      </main>
+    </div>
+
+    <div class="cursor"></div>
+    <div class="cursor2"></div>
+
+    <script>
+      // Initialize Draggable on the element with the 'draggable' id
+      const draggableElement = document.getElementById("draggable");
+      const draggable = new Draggable(draggableElement);
+    </script>
+
+    <script>
+      var cursor = document.querySelector(".cursor");
+      var cursor2 = document.querySelector(".cursor2");
+      document.addEventListener("mousemove", function (e) {
+        cursor.style.cssText = cursor2.style.cssText =
+          "left:" + e.clientX + "px;top:" + e.clientY + "px;";
+      });
+    </script>
+    <script src="script.js"></script>
+  </body>
+</html>

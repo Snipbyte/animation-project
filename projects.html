@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Slider with Swiper.js</title>
+    <link rel="stylesheet" href="./main.css" />
+    <link href='https://unpkg.com/css.gg@2.0.0/icons/css/arrow-long-right.css' rel='stylesheet'>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Roboto:wght@300;400;500;900&display=swap");
+
+      :root {
+        --font-principal: "Roboto";
+        --gradient-bg: linear-gradient(
+          30deg,
+          rgba(0, 0, 0, 0.95) 50%,
+          rgba(0, 0, 0, 0.9) 50.1%
+        );
+        --color-primary: #ffeba7;
+        --color-light: #fff;
+        --color-dark: #000;
+      }
+
+      .other-container {
+        position: relative;
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        background: black;
+        color: white;
+        font-family: var(--font-principal);
+      }
+
+      .swiper {
+        width: 100%;
+        height: 600px;
+        margin-right: 0;
+        align-items: center;
+      }
+
+      .swiper-wrapper {
+        display: flex;
+        align-items: center;
+        counter-reset: list-slider;
+      }
+
+      .swiper-slide {
+        position: relative;
+        height: 90%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        counter-increment: list-slider;
+        font-size: 18px;
+        opacity: 1;
+        transition: opacity 600ms ease;
+      }
+
+      .swiper-slide::before {
+        content: "0" counter(list-slider);
+        display: block;
+        position: absolute;
+        width: 100px;
+        left: 0;
+        top: 0;
+        font-size: 120px;
+        font-weight: 600;
+        line-height: 0.8;
+        font-family: var(--font-principal);
+        color: var(--color-primary);
+        transform: scale(0.5);
+        opacity: 0;
+        z-index: -1;
+        pointer-events: none;
+        transition: all 350ms ease;
+      }
+
+      .swiper-slide-active::before {
+        opacity: 0.4;
+        transform: scale(1);
+      }
+
+      .swiper-slide-active .c-swiper__text {
+        opacity: 1;
+      }
+
+      .swiper-slide-active .c-swiper__title,
+      .swiper-slide-active .c-swiper__link {
+        transform: translateY(0);
+      }
+
+      .swiper-slide-prev {
+        opacity: 0;
+      }
+
+      .swiper-slide-next {
+        opacity: 0.5;
+      }
+
+      .c-swiper__text {
+        opacity: 0;
+        width: 300px;
+        height: 250px;
+        position: absolute;
+        top: 25%;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        transition: opacity 350ms ease;
+      }
+
+      .c-swiper__title {
+        max-height: 100%;
+        font-size: 64px;
+        font-weight: 600;
+        text-shadow: 1px 1px 2px var(--color-dark);
+        text-align: left;
+        pointer-events: none;
+        transition: transform 500ms ease;
+        transition-delay: 100ms;
+        transform: translateY(-25%);
+        z-index: 1;
+      }
+
+      .c-swiper__link {
+        position: relative;
+        max-width: 100px;
+        margin-left: 24px;
+        color: var(--color-light);
+        text-decoration: none;
+        transform: translateY(25%);
+        transition: transform 500ms ease;
+        transition-delay: 200ms;
+      }
+
+      .c-swiper__link::after {
+        content: "";
+        height: 2px;
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 100%;
+        background-color: var(--color-light);
+      }
+
+      .c-swiper__image-container {
+        width: 90%;
+        height: 80%;
+        overflow: hidden;
+       
+      }
+
+      .c-swiper__image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+       
+      }
+
+      .swiper-pagination-bullet {
+        width: 36px;
+        height: 3px;
+        background-color: var(--color-primary);
+        border-radius: 0;
+       
+      }
+      
+    </style>
+  </head>
+  <body class="bg-black">
+    <div class="box"></div>
+    <!-- creating wrapper -->
+    <div class="wrapper">
+      <nav
+        class="flex items-center justify-between px-4 md:px-14 h-16 sticky top-0 bg-black"
+      >
+        <div class="hidden md:block"></div>
+        <div><h1 class="text-3xl font-[600] text-white a-tag">Logo</h1></div>
+        <div class="flex items-center gap-4">
+          <a href="./home.html" class="text-white font-[600] md:text-lg a-tag"
+            >HOME</a
+          >
+          <a
+            href="./projects.html"
+            class="text-white font-[600] md:text-lg a-tag"
+            >PROJECT</a
+          >
+          <a href="./propos.html" class="text-white font-[600] md:text-lg a-tag"
+            >A PROPSOS</a
+          >
+        </div>
+      </nav>
+
+      <div class="other-container">
+        <div class="swiper" id="js-swiper-hotels">
+          <div class="swiper-wrapper">
+            <!-- ITEM 1 -->
+            <div class="swiper-slide">
+              <div class="c-swiper__text">
+                <div class="c-swiper__title">Hotel Spa</div>
+
+                <a href="#" class="c-swiper__link">View Details</a>
+              </div>
+
+              <div class="c-swiper__image-container">
+                <img
+                  src="https://images.pexels.com/photos/2373201/pexels-photo-2373201.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                  alt=""
+                />
+              </div>
+            </div>
+
+            <!-- ITEM 2 -->
+            <div class="swiper-slide">
+              <div class="c-swiper__text">
+                <div class="c-swiper__title">Hotel Urban</div>
+
+                <a href="#" class="c-swiper__link">View Details</a>
+              </div>
+
+              <div class="c-swiper__image-container">
+                <img
+                  src="https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                  alt=""
+                />
+              </div>
+            </div>
+
+            <!-- ITEM 3 -->
+            <div class="swiper-slide">
+              <div class="c-swiper__text">
+                <div class="c-swiper__title">Hotel Adults</div>
+
+                <a href="#" class="c-swiper__link">View Details</a>
+              </div>
+
+              <div class="c-swiper__image-container">
+                <img
+                  src="https://images.pexels.com/photos/6474917/pexels-photo-6474917.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                  alt=""
+                />
+              </div>
+            </div>
+
+            <!-- ITEM 4 -->
+            <div class="swiper-slide">
+              <div class="c-swiper__text">
+                <div class="c-swiper__title">Hotel Beach</div>
+
+                <a href="#" class="c-swiper__link">View Details</a>
+              </div>
+
+              <div class="c-swiper__image-container">
+                <img
+                  src="https://images.pexels.com/photos/1591361/pexels-photo-1591361.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+    </div>
+     <!-- top container -->
+     <div class="top flex px-4 md:gap-36 md:px-36 bg-black">
+      <div>
+        <h1
+          class="text-[#ea5242] tracking-widest font-semibold text-[1.6rem]  md:text-[2rem] mb-10"
+        >
+          PROJECT
+        </h1>
+        <h2 class="pt-[10px] font-[700] text-white">Front-end|VueJS</h2>
+        <h2 class="pt-[10px] font-[700] text-white">Bach-end|PHP</h2>
+        <h2 class="pt-[10px] font-[700] text-white">
+          Geolocalisation|API JS Google Maps
+        </h2>
+      </div>
+      <div>
+        <h1
+          class="text-[#ea5242] tracking-widest font-semibold text-[1.6rem]  md:text-[2rem] mb-10"
+        >
+          DATE
+        </h1>
+        <h1 class="text-[2rem] md:text-[2.5rem] font-[900] text-white">2019</h1>
+      </div>
+    </div>
+    <!-- top container end here -->
+    <div class="discription px-4 md:px-36 mt-20">
+      <h1
+        class="text-[#ea5242] tracking-widest font-semibold text-[1.6rem] md:text-[2rem] mb-10"
+      >
+        DESCRIPTION
+      </h1>
+      <p
+        class="text-white font-[Garamond,sans-serif] text-[1rem] md:text-[1.2rem] text-justify"
+        style="line-height: 1.6rem"
+      >
+        Sachassou est un projet de site web applicatif permettant de localiser
+        les chassseurs en temps réel. Réalisé en collaboration avec 4 autres
+        étudiants dans le cadre de mes études en DUT MMI, Sachassou est LE
+        projet le plus imporant auquel j'ai participé. En tant que chef de
+        projet tout au long de l'année, j'ai pu abordé de nombreuses
+        problématiques liées au web. Le projet se décompose en 2 parties. D'une
+        part une Landing Page afin de présenter l'application. D'autre part,
+        l'application en elle-même, passant par l'emploi de technologies plus
+        complexes.
+      </p>
+    </div>
+    <!-- vioer li site div -->
+    <div>
+      <h1 class=" text-white w-fit border-b-2 font-[600] text-[1rem] md:text-[2rem]  border-b-[#ea5242] mt-4 mx-4 md:mx-36 " style="
+      letter-spacing: 4px;">VOIR LE SITE</h1>
+      <div class="mt-4 mx-4 md:mx-36">
+        <img
+          src="https://www.davyjacquemard.com/static/img/landing-page-top.60ba4f6.jpg"
+          alt=""
+        />
+        <img src="https://www.davyjacquemard.com/static/img/landing-page-mid.3b46ff2.jpg" alt="">
+      </div>
+    </div>
+
+    <!-- Question mark container -->
+    <div class="Question px-4 md:px-36 mt-20">
+      <h1
+        class="text-[#ea5242] tracking-widest font-semibold text-[1.6rem] md:text-[2rem] mb-10"
+      >
+        POURQUOI ?
+      </h1>
+      <p
+        class="text-white font-[Garamond,sans-serif] text-[1rem] md:text-[1.2rem] text-justify"
+        style="line-height: 1.6rem"
+      >
+        Sachassou a pour but de géolocaliser les zones de chasse en temps réel
+        afin d’améliorer la cohabitation entre chasseurs et non-chasseurs en
+        nature. En effet, les accidents liés à la chasse restent chaque année
+        encore trop nombreux. Notre objectif à travers la mise en place de cette
+        application est de répondre à un réel besoin, en proposant un produit
+        visant à faciliter la vie des différents usagers de la nature. Sachassou
+        a donc été pensé continuellement dans l'optique d'innover. L'application
+        a égalment été optimisée pour mobile, qui est de loin le support le plus
+        utilisé dans la fôret.
+      </p>
+    </div>
+    <!-- picture div -->
+    <div class="mx-4 md:mx-36  bg-white my-10">
+      <div class="flex items-center justify-center flex-wrap mx-4 gap-20 py-14">
+        <div class="mobile1 w-72">
+          <img class="w-full h-full" src="https://www.davyjacquemard.com/static/img/landing-page.1f63a57.png" alt="">
+        </div>
+        <div class="mobile1 w-72">
+          <img class="w-full h-full" src="/assets/mobile2.png" alt="">
+        </div>
+        <div class="mobile1 w-72">
+          <img class="w-full h-full" src="/assets/mobile 3.png" alt="">
+        </div>
+        <div class="mobile1 w-72">
+          <img class="w-full h-full" src="/assets/mobile 4.png" alt="">
+        </div>
+        <div class="mobile1 w-72">
+          <img class="w-full h-full" src="/assets/mobile 5.png" alt="">
+        </div>
+        <div class="mobile1 w-72">
+          <img class="w-full h-full" src="/assets/mobile 6.png" alt="">
+        </div>
+      </div>
+    </div>
+    <!-- comment div -->
+    <div class="Question px-4 md:px-36 mt-20">
+      <h1
+        class="text-[#ea5242] tracking-widest font-semibold text-[1.6rem] md:text-[2rem] mb-10"
+      >
+      COMMENT ?
+      </h1>
+      <p
+        class="text-white font-[Garamond,sans-serif] text-[1rem] md:text-[1.2rem] text-justify"
+        style="line-height: 1.6rem"
+      >
+      Sachassou étant le premier grand projet web que j'ai réalisé, il m'a permit de découvrir de nombreuses technologies et d'engranger beaucoup de compétences. D'abord, le site repose sur le framework VueJs qui est le premier framework Javascript que nous avons abordé. Ensuite, le recours à la géolocalisation par le biais de l'API Javascript Google Maps était l'une des premières grandes nouveautés pour moi. Pour les besoins de nore outil, j'ai pu dessiner systématiquement les zones (circulaires ou polygonales) renseignées par les chasseurs en y attachant toutes ses inforamtions relatives stockées dans le back-end. Il y avait également tout une partie gestion des zones, avec la possibilité pour les administrateurs de supprimer des zones suspectes, ou encore le fait que les zones de chasse se suppriment automatiquement à la fin de la durée renseignée par le chasseur. Il a également fallu mettre en place un système d'authentification pour pouvoir différencier les chasseurs des non-chasseurs. Le tout en ayant une application responsive design.
+      <p  class="text-white font-[Garamond,sans-serif] text-[1rem] md:text-[1.2rem] text-justify my-4"
+      style="line-height: 1.6rem ">
+        Ce projet a donc été un réel défi puisqu'il intervint quelques mois après mon entrée dans la formation, et par conséquent avec un bagage de connaissances très peu garni. 
+      </p>
+
+      </p>
+    </div>
+    <!-- pictures container -->
+    <div class="mx-4 md:mx-36 flex flex-col gap-4">
+      <img src="/assets/after comment 1.jpg" alt="">
+      <img src="/assets/after comment 2.jpg" alt="">
+      <img src="/assets/after comment 2.jpg" alt="">
+    </div>
+
+    
+    <!-- LaSuite container -->
+    <div class="LaSuite px-4 md:px-36 mt-20">
+      <h1
+        class="text-[#ea5242] tracking-widest font-semibold text-[2rem] mb-10"
+      >
+      LA SUITE ?
+      </h1>
+      <p
+        class="text-white font-[Garamond,sans-serif] text-[1rem] md:text-[1.2rem] text-justify"
+        style="line-height: 1.6rem"
+      >
+      Dans le cadre d'une spécialisation dans le développement au semestre 4 de la formation MMI, nous avons pu nous pencher sur une version de Sachassou en application mobile. L'objectif dans un premier temps n'était pas de reproduire exactement le même service, mais plutôt de la positionner comme un complément au site web. Nous avons donc décidé de nous concentrer uniquement sur une application qui permet de visualiser les zones de chasse signalées depuis l'application web. Pour cela nous avons utilisé des tecnologies comme Ionic Cordova, permettant e développement d'applications mobiles Android et IOS, sur une base d'Angular JS. 
+      </p>
+    </div>
+    <!-- last picture container -->
+    <div class="mx-4 md:mx-36 my-8">
+      <img class="w-full" src="https://www.davyjacquemard.com/static/img/mockup03.53ad518.jpg" alt="">
+    </div>
+    <!-- line div container -->
+    <div class="w-6/12 h-1 mx-auto my-8 bg-[#ea5242]"></div>
+    <!-- line div end -->
+    <h1 class="text-center text-white my-8" style="letter-spacing: 7px;">PROJET SUIVANT</h1>
+
+    <!-- last section -->
+    <div  class="next-container flex items-center justify-center relative mt-20" style="transform: translate(0px);"><h1  class="flex absolute text-[4.5rem] text-center text-white hover:right-96 hover:text-[#ea5242]" >DATAVISUALISATION</h1></div>
+    <div class="cursor"></div>
+    <div class="cursor2"></div>
+    <script>
+      var cursor = document.querySelector(".cursor");
+      var cursor2 = document.querySelector(".cursor2");
+      document.addEventListener("mousemove", function (e) {
+        cursor.style.cssText = cursor2.style.cssText =
+          "left:" + e.clientX + "px;top:" + e.clientY + "px;";
+      });
+    </script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+      integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="script.js"></script>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <script>
+      var swiper = new Swiper("#js-swiper-hotels", {
+        slidesPerView: 2,
+        spaceBetween: 20,
+        centeredSlides: true,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+      });
+    </script>
+  </body>
+</html>
